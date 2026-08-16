@@ -1,11 +1,13 @@
 const CACHE_NAME = "finance-tracker-v4";
 const BASE = "/finance-tracker/";
+
 const CORE = [
   BASE,
   BASE + "index.html",
   BASE + "styles.css",
   BASE + "app.js",
   BASE + "manifest.json",
+  BASE + "pwa-register.js",
   BASE + "icon-192.png",
   BASE + "icon-512.png"
 ];
