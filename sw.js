@@ -6,8 +6,8 @@ const CORE = [
   BASE + "styles.css",
   BASE + "app.js",
   BASE + "manifest.json",
-BASE + "icon-192.png",
-BASE + "icon-512.png"
+  BASE + "icon-192.png",
+  BASE + "icon-512.png"
 ];
 
 self.addEventListener("install", event => {
