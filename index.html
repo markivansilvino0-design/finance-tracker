@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17365D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Finance Tracker">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
+<title>Finance Tracker</title>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="eyebrow">PERSONAL FINANCE</div>
+    <h1>Finance Tracker</h1>
+  </div>
+  <button id="installBtn" class="icon-btn" title="Install app" hidden>＋</button>
+</header>
+
+<main id="app">
+<section id="home" class="page active">
+  <div class="month-row">
+    <button id="prevMonth">‹</button><strong id="monthLabel"></strong><button id="nextMonth">›</button>
+  </div>
+  <div class="cards-grid">
+    <div class="metric income"><span>Income</span><b id="mIncome">₱0.00</b></div>
+    <div class="metric expense"><span>Expenses</span><b id="mExpense">₱0.00</b></div>
+    <div class="metric"><span>Net Cash Flow</span><b id="mNet">₱0.00</b></div>
+    <div class="metric cardmetric"><span>Credit Cards</span><b id="mCC">₱0.00</b></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title"><h2>Accounts</h2><button class="text-btn" data-page="accounts">View all</button></div>
+    <div id="accountSummary"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title"><h2>Upcoming Installments</h2><button class="text-btn" data-page="installments">View all</button></div>
+    <div id="upcoming"></div>
+  </div>
+</section>
+
+<section id="transactions" class="page">
+  <div class="section-head"><div><div class="eyebrow">LEDGER</div><h2>Transactions</h2></div><button class="primary" id="addTx">＋ Add</button></div>
+  <div class="filters"><input id="txSearch" placeholder="Search transactions"><select id="txType"><option value="">All types</option><option>Income</option><option>Expense</option><option>Transfer</option><option>Credit Card Payment</option></select></div>
+  <div id="txList"></div>
+</section>
+
+<section id="accounts" class="page">
+  <div class="section-head"><div><div class="eyebrow">BANKING</div><h2>Accounts</h2></div><button class="primary" id="addAccount">＋ Add</button></div>
+  <div id="accountsList"></div>
+</section>
+
+<section id="cards" class="page">
+  <div class="section-head"><div><div class="eyebrow">CREDIT</div><h2>Credit Cards</h2></div><button class="primary" id="addCard">＋ Add</button></div>
+  <div id="cardsList"></div>
+</section>
+
+<section id="installments" class="page">
+  <div class="section-head"><div><div class="eyebrow">PAYMENTS</div><h2>Installments</h2></div><button class="primary" id="addInstallment">＋ Add</button></div>
+  <div id="installmentsList"></div>
+</section>
+
+<section id="reports" class="page">
+  <div class="section-head"><div><div class="eyebrow">ANALYTICS</div><h2>Reports</h2></div></div>
+  <div class="panel">
+    <div class="panel-title"><h2>Google Sheets Sync</h2><span id="syncStatus" class="muted">Not connected</span></div>
+    <p class="muted">Connect this app to your Google Apps Script web app to back up and restore your finance data.</p>
+    <div class="field"><label>Apps Script Web App URL</label><input id="syncUrl" placeholder="https://script.google.com/macros/s/.../exec"></div>
+    <div class="form-actions">
+      <button class="save" id="saveSyncUrl">Save URL</button>
+      <button class="cancel" id="pushSheets">Backup to Sheets</button>
+      <button class="cancel" id="pullSheets">Restore from Sheets</button>
+    </div>
+  </div>
+  <div class="panel"><h3>Monthly cash flow</h3><div id="cashFlowReport"></div></div>
+  <div class="panel"><h3>Expenses by category</h3><div id="categoryReport"></div></div>
+</section>
+</main>
+
+<button class="fab" id="fab">＋</button>
+<nav class="bottom-nav">
+  <button data-page="home" class="active"><span>⌂</span>Home</button>
+  <button data-page="transactions"><span>▤</span>Transactions</button>
+  <button data-page="accounts"><span>▣</span>Accounts</button>
+  <button data-page="cards"><span>▤</span>Cards</button>
+  <button data-page="reports"><span>◒</span>More</button>
+</nav>
+
+<div id="modal" class="modal" hidden>
+ <div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button id="closeModal">×</button></div><form id="form"></form></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
