@@ -19,7 +19,7 @@ const SHEETS = {
   Accounts: ["name","type","institution","opening"],
   CreditCards: ["name","bank","limit","dueDay"],
   Transactions: ["id","date","type","account","category","description","amount","cleared"],
-  Installments: ["id","card","description","purchaseDate","amount","down","term","monthly","paid","nextDue","status"],
+  Installments: ["id","card","description","purchaseDate","amount","down","financed","term","monthly","totalPayable","paid","nextDue","status"],
   Meta: ["key","value"]
 };
 
@@ -57,6 +57,7 @@ function ensureSheets_() {
     let sh = ss.getSheetByName(name);
     if (!sh) sh = ss.insertSheet(name);
     if (sh.getLastRow() === 0) sh.getRange(1,1,1,SHEETS[name].length).setValues([SHEETS[name]]);
+    else sh.getRange(1,1,1,SHEETS[name].length).setValues([SHEETS[name]]);
   });
 }
 
@@ -65,7 +66,7 @@ function replaceState_(data) {
   writeArray_("Accounts", (data.accounts||[]).map(x=>[x.name,x.type,x.institution,x.opening]));
   writeArray_("CreditCards", (data.cards||[]).map(x=>[x.name,x.bank,x.limit,x.dueDay]));
   writeArray_("Transactions", (data.transactions||[]).map(x=>[x.id||Utilities.getUuid(),x.date,x.type,x.account,x.category,x.description,x.amount,x.cleared]));
-  writeArray_("Installments", (data.installments||[]).map(x=>[x.id||Utilities.getUuid(),x.card,x.description,x.purchaseDate,x.amount,x.down,x.term,x.monthly,x.paid,x.nextDue,x.status]));
+  writeArray_("Installments", (data.installments||[]).map(x=>[x.id||Utilities.getUuid(),x.card,x.description,x.purchaseDate,x.amount,x.down,x.financed||Math.max(0,Number(x.amount||0)-Number(x.down||0)),x.term,x.monthly,x.totalPayable||Number(x.monthly||0)*Number(x.term||0),x.paid,x.nextDue,x.status]));
   const sh=getSS_().getSheetByName("Meta");
   clearData_(sh);
   sh.getRange(2,1,1,2).setValues([["lastSync",new Date().toISOString()]]);
@@ -94,7 +95,7 @@ function readState_() {
       accounts:rows("Accounts").map(r=>({name:r[0],type:r[1],institution:r[2],opening:Number(r[3]||0)})),
       cards:rows("CreditCards").map(r=>({name:r[0],bank:r[1],limit:Number(r[2]||0),dueDay:r[3]})),
       transactions:rows("Transactions").map(r=>({id:r[0],date:dateString_(r[1]),type:r[2],account:r[3],category:r[4],description:r[5],amount:Number(r[6]||0),cleared:r[7]})),
-      installments:rows("Installments").map(r=>({id:r[0],card:r[1],description:r[2],purchaseDate:dateString_(r[3]),amount:Number(r[4]||0),down:Number(r[5]||0),term:Number(r[6]||0),monthly:Number(r[7]||0),paid:Number(r[8]||0),nextDue:dateString_(r[9]),status:r[10]}))
+      installments:rows("Installments").map(r=>({id:r[0],card:r[1],description:r[2],purchaseDate:dateString_(r[3]),amount:Number(r[4]||0),down:Number(r[5]||0),financed:Number(r[6]||0),term:Number(r[7]||0),monthly:Number(r[8]||0),totalPayable:Number(r[9]||0),paid:Number(r[10]||0),nextDue:dateString_(r[11]),status:r[12]}))
     }
   };
 }

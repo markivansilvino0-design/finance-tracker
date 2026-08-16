@@ -17,11 +17,15 @@ Open the PWA → **More/Reports → Google Sheets Sync**.
 Paste the Web App URL and tap **Save URL**.
 
 ## 5. Backup and restore
-- **Backup to Sheets** replaces the Google Sheet data with the current device data.
+- **Sync Now** replaces the Google Sheet data with the current device data.
 - **Restore from Sheets** replaces the current device data with the saved Google Sheet data.
 
 ### Recommended workflow
-Use the phone app as the primary entry point. Tap **Backup to Sheets** after important changes. Use the Google Sheet for reporting, analysis, and backup.
+Use the phone app as the primary entry point. Tap **Sync Now** after important changes. Use the Google Sheet for reporting, analysis, and backup.
 
 ### Important
 The current sync is intentionally a simple full backup/restore model. It does not merge simultaneous edits. Avoid editing the sheet and phone at the same time and then overwriting one with the other.
+
+
+## V3 note
+After updating Code.gs, create a new Web App deployment version so the V3 installment fields (financed and totalPayable) are stored and restored correctly. The app will automatically sync changes once the existing /exec URL is connected.

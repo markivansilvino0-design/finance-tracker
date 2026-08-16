@@ -76,11 +76,11 @@
   <div class="section-head"><div><div class="eyebrow">ANALYTICS</div><h2>Reports</h2></div></div>
   <div class="panel">
     <div class="panel-title"><h2>Google Sheets Sync</h2><span id="syncStatus" class="muted">Not connected</span></div>
-    <p class="muted">Connect this app to your Google Apps Script web app to back up and restore your finance data.</p>
+    <p class="muted">Connect this app to your Google Apps Script web app. Changes are saved locally first, then automatically synced to Google Sheets when a Web App URL is connected.</p>
     <div class="field"><label>Apps Script Web App URL</label><input id="syncUrl" placeholder="https://script.google.com/macros/s/.../exec"></div>
     <div class="form-actions">
       <button class="save" id="saveSyncUrl">Save URL</button>
-      <button class="cancel" id="pushSheets">Backup to Sheets</button>
+      <button class="cancel" id="pushSheets">Sync Now</button>
       <button class="cancel" id="pullSheets">Restore from Sheets</button>
     </div>
   </div>
