@@ -29,7 +29,17 @@
     <div class="metric income"><span>Income</span><b id="mIncome">₱0.00</b></div>
     <div class="metric expense"><span>Expenses</span><b id="mExpense">₱0.00</b></div>
     <div class="metric"><span>Net Cash Flow</span><b id="mNet">₱0.00</b></div>
+    <div class="metric"><span>Net Worth</span><b id="mNetWorth">₱0.00</b></div>
     <div class="metric cardmetric"><span>Credit Cards</span><b id="mCC">₱0.00</b></div>
+    <div class="metric"><span>Available Credit</span><b id="mAvailable">₱0.00</b></div>
+  </div>
+  <div class="panel quick-panel"><div class="panel-title"><h2>Quick Actions</h2></div>
+    <div class="quick-actions">
+      <button class="quick" id="quickIncome">＋ Income</button>
+      <button class="quick" id="quickExpense">− Expense</button>
+      <button class="quick" id="quickTransfer">⇄ Transfer</button>
+      <button class="quick" id="quickPayment">💳 Card Payment</button>
+    </div>
   </div>
   <div class="panel">
     <div class="panel-title"><h2>Accounts</h2><button class="text-btn" data-page="accounts">View all</button></div>
@@ -76,6 +86,10 @@
   </div>
   <div class="panel"><h3>Monthly cash flow</h3><div id="cashFlowReport"></div></div>
   <div class="panel"><h3>Expenses by category</h3><div id="categoryReport"></div></div>
+  <div class="panel"><div class="panel-title"><h3>Installment Calendar</h3><span class="muted">Next 6 months</span></div><div id="installmentCalendar"></div></div>
+  <div class="panel"><h3>Data & Backup</h3><div class="form-actions">
+    <button class="cancel" id="exportData">Export JSON</button><button class="cancel" id="importDataBtn">Import JSON</button><button class="cancel" id="clearData">Reset Data</button>
+  </div><input id="importData" type="file" accept=".json" hidden></div>
 </section>
 </main>
 
